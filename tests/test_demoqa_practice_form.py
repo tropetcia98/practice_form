@@ -1,5 +1,6 @@
 import os
-from selene import browser, have, be
+
+from selene import browser, have
 
 
 def test_practice_form():
@@ -17,8 +18,8 @@ def test_practice_form():
     browser.element('.react-datepicker__month').element('.react-datepicker__day--011').click()
     browser.element('#subjectsInput').type('phy').press_enter()
     browser.element('#subjectsInput').type("computer").press_enter()
-    browser.element(('[for="hobbies-checkbox-1"]')).click()
-    browser.element(('[for="hobbies-checkbox-2"]')).click()
+    browser.element('[for="hobbies-checkbox-1"]').click()
+    browser.element('[for="hobbies-checkbox-2"]').click()
     browser.element('#uploadPicture').send_keys(os.path.abspath('homework.png'))
     browser.element('#currentAddress').type('116 N 2nd St, Cave City, KY 42127, USA')
     browser.element('#state').element('#react-select-3-input').type('Uttar').press_enter()
