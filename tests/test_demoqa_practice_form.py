@@ -24,8 +24,7 @@ def test_practice_form():
     browser.element('#currentAddress').type('116 N 2nd St, Cave City, KY 42127, USA')
     browser.element('#state').element('#react-select-3-input').type('Uttar').press_enter()
     browser.element('#city').element('#react-select-4-input').type('Mer').press_enter()
-    browser.element('#submit').perform(command.js.scroll_into_view)
-    browser.element('#submit').click()
+    browser.element('#submit').perform(command.js.scroll_into_view).click()
 
     browser.element('.modal-title').should(have.text('Thanks for submitting the form'))
     browser.element('.table').all('td').even.should(have.exact_texts(
