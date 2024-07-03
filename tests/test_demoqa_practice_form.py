@@ -1,6 +1,6 @@
 import os
 
-from selene import browser, have
+from selene import browser, have, command
 
 
 def test_practice_form():
@@ -24,6 +24,7 @@ def test_practice_form():
     browser.element('#currentAddress').type('116 N 2nd St, Cave City, KY 42127, USA')
     browser.element('#state').element('#react-select-3-input').type('Uttar').press_enter()
     browser.element('#city').element('#react-select-4-input').type('Mer').press_enter()
+    browser.element('#submit').perform(command.js.scroll_into_view)
     browser.element('#submit').click()
 
     browser.element('.modal-title').should(have.text('Thanks for submitting the form'))
@@ -32,7 +33,7 @@ def test_practice_form():
         'tropetcia967@gmail.com',
         'Male',
         '8900900555',
-        '11 March,1998',
+        '11 February,1998',
         'Physics, Computer Science',
         'Sports, Reading',
         'homework.png',
