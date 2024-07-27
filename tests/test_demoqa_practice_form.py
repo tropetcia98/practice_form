@@ -15,7 +15,7 @@ def test_practice_form():
     registration_page.fill_subject('computer')
     registration_page.choose_hobbies()
     registration_page.upload_picture()
-    registration_page.fill_adress('116 N 2nd St, Cave City, KY 42127, USA')
+    registration_page.fill_address('116 N 2nd St, Cave City, KY 42127, USA')
     registration_page.fill_state('Uttar')
     registration_page.fill_city('Mer')
     registration_page.press_submit()

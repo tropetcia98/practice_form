@@ -5,58 +5,70 @@ from selene import browser, command, have
 
 class RegistrationPage:
     def __init__(self):
-        self.gender_male = '[for="gender-radio-1"]'
+        self.name = browser.element('#firstName')
+        self.last_name = browser.element('#lastName')
+        self.email = browser.element('#userEmail')
+        self.gender = browser.element('[for="gender-radio-1"]')
+        self.phone_number = browser.element('#userNumber')
+        self.month = browser.element('.react-datepicker__month-select')
+        self.year = browser.element('.react-datepicker__year-select')
+        self.subject = browser.element('#subjectsInput')
+        self.hobby = browser.element('[for="hobbies-checkbox-1"]')
+        self.address = browser.element('#currentAddress')
+        self.state = browser.element('#state').element('#react-select-3-input')
+        self.city = browser.element('#city').element('#react-select-4-input')
+        self.submit = browser.element('#submit')
 
     def open(self):
         browser.open('/automation-practice-form')
 
     def fill_first_name(self, value):
-        browser.element('#firstName').type(value)
+        self.name.type(value)
 
     def fill_last_name(self, value):
-        browser.element('#lastName').type(value)
+        self.last_name.type(value)
 
     def fill_email(self, value):
-        browser.element('#userEmail').type(value)
+        self.email.type(value)
 
     def choose_gender(self):
-        browser.element(self.gender_male).click()
+        self.gender.click()
 
     def fill_number(self, value):
-        browser.element('#userNumber').type(value)
+        self.phone_number.type(value)
 
-    def fill_date_of_birth(self, day, month, year):
+    def fill_date_of_birth(self, value_day, value_month, value_year):
         browser.element('#dateOfBirthInput').click()
-        browser.element('.react-datepicker__month-select').click()
-        browser.element('.react-datepicker__month-select').type(month)
-        browser.element('.react-datepicker__year-select').click()
-        browser.element('.react-datepicker__year-select').element(f'[value="{year}"]').click()
-        browser.element('.react-datepicker__month').element(f'.react-datepicker__day--0{day}').click()
+        self.month.click()
+        self.month.type(value_month)
+        self.year.click()
+        self.year.element(f'[value="{value_year}"]').click()
+        browser.element('.react-datepicker__month').element(f'.react-datepicker__day--0{value_day}').click()
 
     def fill_subject(self, value):
-        browser.element('#subjectsInput').type(value).press_enter()
+        self.subject.type(value).press_enter()
 
     def choose_hobbies(self):
-        browser.element('[for="hobbies-checkbox-1"]').click()
+        self.hobby.click()
 
     def upload_picture(self):
         browser.element('#uploadPicture').send_keys(os.path.abspath('homework.png'))
 
-    def fill_adress(self, value):
-        browser.element('#currentAddress').type(value)
+    def fill_address(self, value):
+        self.address.type(value)
 
     def fill_state(self, value):
-        browser.element('#state').element('#react-select-3-input').type(value).press_enter()
+        self.state.type(value).press_enter()
 
     def fill_city(self, value):
-        browser.element('#city').element('#react-select-4-input').type(value).press_enter()
+        self.city.type(value).press_enter()
 
     def press_submit(self):
-        browser.element('#submit').perform(command.js.scroll_into_view).click()
+        self.submit.perform(command.js.scroll_into_view).click()
 
     def should_registered_user_with(self, full_name, email, gender, phone_number, date_of_birth, subjects, hobby,
                                     upload_picture,
-                                    adress, state_and_city):
+                                    address, state_and_city):
         browser.element('.modal-title').should(have.text('Thanks for submitting the form'))
         browser.element('.table').all('td').even.should(have.texts(
             full_name,
@@ -67,5 +79,5 @@ class RegistrationPage:
             subjects,
             hobby,
             upload_picture,
-            adress,
+            address,
             state_and_city))
