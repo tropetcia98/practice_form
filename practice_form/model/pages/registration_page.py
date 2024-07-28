@@ -1,6 +1,6 @@
 import os
-
 from selene import browser, command, have
+from practice_form.data.users import User
 
 
 class RegistrationPage:
@@ -66,18 +66,31 @@ class RegistrationPage:
     def press_submit(self):
         self.submit.perform(command.js.scroll_into_view).click()
 
-    def should_registered_user_with(self, full_name, email, gender, phone_number, date_of_birth, subjects, hobby,
-                                    upload_picture,
-                                    address, state_and_city):
+    def register(self, user: User):
+        self.fill_first_name(user.first_name)
+        self.fill_last_name(user.last_name)
+        self.fill_email(user.email)
+        self.choose_gender()
+        self.fill_number(user.phone_number)
+        self.fill_date_of_birth(user.day_of_birth, user.month_of_birth, user.year_of_birth)
+        self.fill_subject(user.subjects)
+        self.choose_hobbies()
+        self.upload_picture()
+        self.fill_address(user.address)
+        self.fill_state(user.state)
+        self.fill_city(user.city)
+        self.press_submit()
+
+    def should_registered_user_with(self, user: User):
         browser.element('.modal-title').should(have.text('Thanks for submitting the form'))
         browser.element('.table').all('td').even.should(have.texts(
-            full_name,
-            email,
-            gender,
-            phone_number,
-            date_of_birth,
-            subjects,
-            hobby,
-            upload_picture,
-            address,
-            state_and_city))
+            f'{user.first_name} {user.last_name}',
+            f'{user.email}',
+            f'{user.gender}',
+            f'{user.phone_number}',
+            f'{user.day_of_birth} {user.month_of_birth},{user.year_of_birth}',
+            f'{user.subjects}',
+            f'{user.hobby}',
+            f'{user.picture}',
+            f'{user.address}',
+            f'{user.state} {user.city}'))
