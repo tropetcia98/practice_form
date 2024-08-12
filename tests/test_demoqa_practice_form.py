@@ -1,5 +1,5 @@
 from practice_form.data.users import user
-from practice_form.model.pages.registration_page import RegistrationPage
+from pages.registration_page import RegistrationPage
 
 
 def test_practice_form():

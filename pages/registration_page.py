@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 from selene import browser, command, have
 from practice_form.data.users import User
 
@@ -51,8 +51,8 @@ class RegistrationPage:
     def choose_hobbies(self):
         self.hobby.click()
 
-    def upload_picture(self):
-        browser.element('#uploadPicture').send_keys(os.path.abspath('homework.png'))
+    def upload_picture(self, photo):
+        browser.element('#uploadPicture').send_keys(str(Path(__file__).parent.parent.joinpath(f'resources/{photo}')))
 
     def fill_address(self, value):
         self.address.type(value)
@@ -75,7 +75,7 @@ class RegistrationPage:
         self.fill_date_of_birth(user.day_of_birth, user.month_of_birth, user.year_of_birth)
         self.fill_subject(user.subjects)
         self.choose_hobbies()
-        self.upload_picture()
+        self.upload_picture(user.picture)
         self.fill_address(user.address)
         self.fill_state(user.state)
         self.fill_city(user.city)
