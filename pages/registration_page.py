@@ -1,6 +1,7 @@
 import os
 
 from selene import browser, command, have
+from pathlib import Path
 
 
 class RegistrationPage:
@@ -51,8 +52,8 @@ class RegistrationPage:
     def choose_hobbies(self):
         self.hobby.click()
 
-    def upload_picture(self):
-        browser.element('#uploadPicture').send_keys(os.path.abspath('homework.png'))
+    def upload_picture(self, photo):
+        browser.element('#uploadPicture').send_keys(str(Path(__file__).parent.parent.joinpath(f'resources/{photo}')))
 
     def fill_address(self, value):
         self.address.type(value)
