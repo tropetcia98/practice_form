@@ -1,3 +1,5 @@
+import allure
+
 from practice_form.data.users import user
 from pages.registration_page import RegistrationPage
 
@@ -5,6 +7,11 @@ from pages.registration_page import RegistrationPage
 def test_practice_form():
     registration_page = RegistrationPage()
 
-    registration_page.open()
-    registration_page.register(user)
-    registration_page.should_registered_user_with(user)
+    with allure.step('Открытие бразуера'):
+        registration_page.open()
+
+    with allure.step('Регистрация пользователя'):
+        registration_page.register(user)
+
+    with allure.step('Проверяем данные пользователя'):
+        registration_page.should_registered_user_with(user)
