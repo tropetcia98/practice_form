@@ -20,7 +20,7 @@ class RegistrationPage:
         self.submit = browser.element('#submit')
 
     def open(self):
-        browser.open('http://demoqa.com/automation-practice-form')
+        browser.open('/automation-practice-form')
 
     def fill_first_name(self, value):
         self.name.type(value)
