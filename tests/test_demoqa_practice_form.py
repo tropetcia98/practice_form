@@ -1,7 +1,7 @@
 import allure
 
 from practice_form.data.users import user
-from pages.registration_page import RegistrationPage
+from practice_form.pages.registration_page import RegistrationPage
 
 
 def test_practice_form():
