@@ -52,7 +52,8 @@ class RegistrationPage:
         self.hobby.click()
 
     def upload_picture(self, photo):
-        browser.element('#uploadPicture').send_keys(str(Path(__file__).parent.parent.joinpath(f'resources/{photo}')))
+        browser.element('#uploadPicture').send_keys(
+            str(Path(__file__).parent.parent.parent.joinpath(f'resources/{photo}')))
 
     def fill_address(self, value):
         self.address.type(value)
