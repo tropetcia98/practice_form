@@ -34,7 +34,6 @@ class RegistrationPage:
     def choose_gender(self):
         self.gender.click()
 
-
     def fill_number(self, value):
         self.phone_number.type(value)
 
